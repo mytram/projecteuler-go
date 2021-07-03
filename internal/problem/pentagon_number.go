@@ -12,37 +12,31 @@ type pentagonNumbers struct {
 	reverseNumbers map[uint]uint
 }
 
-func (this *pentagonNumbers) getByIndex(index uint) uint {
+func (this *pentagonNumbers) addNext() uint {
+	i := this.index + 1
+	pentagon := pentagonNumber(i)
+	this.index = i
+	this.numbers[i] = pentagon
+	this.reverseNumbers[pentagon] = i
+
+	return pentagon
+}
+
+func (this *pentagonNumbers) get(index uint) uint {
 	if this.index >= index {
 		return this.numbers[index]
 	}
 
 	for i := this.index; i <= index; i++ {
-		pentagon := pentagonNumber(i)
-
-		this.index = i
-		this.numbers[i] = pentagon
-		this.reverseNumbers[pentagon] = i
+		this.addNext()
 	}
 
 	return this.numbers[index]
 }
 
 func (this *pentagonNumbers) addMoreTill(limit uint) {
-	if this.numbers[this.index] >= limit {
-		return
-	}
-
-	for {
-		this.index += 1
-		pentagon := pentagonNumber(this.index)
-
-		this.numbers[this.index] = pentagon
-		this.reverseNumbers[pentagon] = this.index
-
-		if pentagon >= limit {
-			return
-		}
+	for pentagon := this.get(this.index); pentagon < limit; {
+		pentagon = this.addNext()
 	}
 }
 

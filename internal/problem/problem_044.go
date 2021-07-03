@@ -12,10 +12,11 @@ func Solve044() (string, uint) {
 
 	for !stop {
 		n += 1
-		pentagon := pn.getByIndex(n)
+		nth := pn.get(n)
 
 		for i := n - 1; i > 0; i-- {
-			diff := pentagon - pn.numbers[i]
+			ith := pn.get(i)
+			diff := nth - ith
 
 			if diff >= minDiff {
 				break
@@ -25,14 +26,14 @@ func Solve044() (string, uint) {
 				continue
 			}
 
-			sum := pentagon + pn.numbers[i]
+			sum := nth + ith
 
 			if !pn.found(sum) {
 				continue
 			}
 
-			fmt.Printf("n=%d pentagon=%d i=%d pentagon=%d diff=%d diffN=%d sum=%d sumN=%d\n",
-				n, pentagon, i,
+			fmt.Printf("n=%d nth=%d i=%d nth=%d diff=%d diffN=%d sum=%d sumN=%d\n",
+				n, nth, i,
 				pn.numbers[i],
 				diff,
 				pn.reverseNumbers[diff],
