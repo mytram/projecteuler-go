@@ -8,10 +8,7 @@ func Solve044() (string, uint) {
 
 	pn := newPentagonNumbers()
 
-	n := uint(0)
-
-	for !stop {
-		n += 1
+	for n := uint(1); !stop; n++ {
 		nth := pn.get(n)
 
 		for i := n - 1; i > 0; i-- {
