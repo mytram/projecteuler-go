@@ -1,6 +1,17 @@
 # projecteuler-go
 
-# Problem 059
+## Problem 058
+
+A Ulam spiral is represented by a series of natural numbers and their 2 dimentional position coordinates in the spiral. The position is represented by `(x, y)` and it starts at the origin of `(0, 0)`.
+
+When the sprial grows, it can move in four directions:
+
+- right
+- up
+- left
+- down
+
+## Problem 059
 
 The plain text is
 
