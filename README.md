@@ -52,6 +52,14 @@ For example, using this coordinate system, we can represent the first 9 numbers 
 
 ## Problem 059
 
+If a three letter password is presented, the password is applied to decipher the cipher text. If the deciphered text contains legible English words, the deciphered text is the plain text.
+
+If a list of all possible passwords is generated, the above process can be applied to find the plain text.
+
+- The list of all possible passwords is a permutation with repetition, though in this case we will only need the first three letters. And therefore there are `16900` possible passwords in total.
+
+- A printable ASCII character is in the range 32 to 126, inclusively. But also some of the printable characters may not appear as legible English words, such as `~`. These characters can be added to the checking conditions on a trial and error basis
+
 The plain text is
 
 ```

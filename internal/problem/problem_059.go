@@ -1,7 +1,7 @@
 package problem
 
 func Solve059() (string, int) {
-	for _, password := range combinations(letters, 3) {
+	for _, password := range permutationsWithReps(letters, 3) {
 		plainText, deciphered := decipher(password, cipherText)
 
 		if deciphered {
@@ -17,20 +17,15 @@ func Solve059() (string, int) {
 	return "059", 0
 }
 
-func combinations(list []byte, pick int) [][]byte {
+func permutationsWithReps(list []byte, pick int) [][]byte {
 	if pick == 0 {
 		return [][]byte{{}}
 	}
 
 	combs := [][]byte{}
 
-	for i, e := range list {
-		// The sublist except for element i
-		sublist := make([]byte, i)
-		copy(sublist, list[0:i])
-		sublist = append(sublist, list[i+1:]...)
-
-		subCombs := combinations(sublist, pick-1)
+	for _, e := range list {
+		subCombs := permutationsWithReps(list, pick-1)
 
 		for _, comb := range subCombs {
 			combs = append(combs, append([]byte{e}, comb...))
@@ -40,7 +35,7 @@ func combinations(list []byte, pick int) [][]byte {
 	return combs
 }
 
-func isWord(c byte) bool {
+func ofWord(c byte) bool {
 	return c >= 32 && c < 127 && c != '`' && c != '~'
 }
 
@@ -52,7 +47,7 @@ func decipher(password []byte, cipherText []byte) ([]byte, bool) {
 	for i, c := range cipherText {
 		p := password[i%length] ^ c
 
-		if isWord(p) {
+		if ofWord(p) {
 			plainText[i] = p
 		} else {
 			return nil, false
